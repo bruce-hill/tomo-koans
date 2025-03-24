@@ -1,4 +1,6 @@
-#!/bin/env tomo
+# This is the Tomo koans program
+
+_HELP := "tomo koans - A tutorial program for learning the Tomo programming language"
 
 use colorful
 use shell
