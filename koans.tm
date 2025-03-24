@@ -45,7 +45,7 @@ struct Lesson(file:Path, description:Text, expected_output=none:Text):
         return Success(output)
 
 LESSONS := [
-    Lesson((./lessons/lesson-01.tm), "Getting Started", "Hello world$\n"),
+    Lesson((./lessons/lesson-01-hello-world.tm), "Hello World", "Hello world$\n"),
     Lesson((./lessons/lesson-02.tm), "Working with Text"),
 ]
 
