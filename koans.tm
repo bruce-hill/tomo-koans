@@ -88,42 +88,43 @@ func summarize_tests(highlight=none:Path):
 
     ":print()
 
-func run_lesson(lesson:Lesson, result:TestResult -> TestResult):
+func choose_option(options:{Text,Text} -> Text):
     repeat:
-        clear_screen()
-        $Colorful"
-
-            @(yellow,b,u:Lesson: "$(lesson.description)")
-            Here's what we have right now:
-
-        ":print()
-
-        result:print()
-        if result:is_success():
+        for k,v in options:
             $Colorful"
-                @(green,b:✨ Great job, this test is passing! ✨)
-
+                @(b:($k)) $v
             ":print()
+        choice := (ask("Choose an option: ") or goodbye()):lower():to(1)
+        if options:has(choice):
+            return choice
+        else if choice == "q":
+            goodbye()
         else:
             $Colorful"
-                @(red,b:Looks like this test isn't passing yet! 😢)
-
+                @(red:I'm sorry, I don't recognize that choice, please try again!")
             ":print()
+    fail("Unreachable")
 
-        action := (ask("(e)dit the file and try again? Go (b)ack? Or (q)uit? ") or return result):lower()
-        if action == "e" or action == "edit":
-            $Shell"
-                $(editor) $(lesson.file)
-            ":run():or_fail("Could not open editor $(editor)")
+func show_lesson(lesson:Lesson, result:TestResult):
+    clear_screen()
+    $Colorful"
 
-            result = lesson:get_result()
-            result:print()
-        else if action == "b" or action == "back":
-            stop
-        else if action == "q" or action == "quit":
-            goodbye()
+        @(yellow,b,u:$(lesson.description))
+        Here's what we have right now:
 
-    return result
+    ":print()
+
+    result:print()
+    if result:is_success():
+        $Colorful"
+            @(green,b:✨ Great job, this test is passing! ✨)
+
+        ":print()
+    else:
+        $Colorful"
+            @(red,b:Looks like this test isn't passing yet! 😢)
+
+        ":print()
 
 func goodbye(-> Abort):
     clear_screen()
@@ -194,7 +195,28 @@ func main(clean=no -> Abort):
             $Colorful"@(red:That's not a valid test number!)":print()
             skip repeat
 
-        lesson := LESSONS[n]
-        test_results[n] = run_lesson(lesson, test_results[n])
-    
+        repeat:
+            lesson := LESSONS[n]
+            show_lesson(lesson, test_results[n])
+
+            options := &{
+                "e"="Edit file and try again",
+                "l"="Show the lesson list",
+                "q"="Quit",
+            }
+            if n < LESSONS.length: options["n"] = "Go to the next lesson"
+            when choose_option(options) is "e":
+                $Shell"
+                    $(editor) $(lesson.file)
+                ":run():or_fail("Could not open editor $(editor)")
+
+                test_results[n] = lesson:get_result()
+                test_results[n]:print()
+            is "l":
+                stop
+            is "n":
+                n += 1
+            is "q":
+                goodbye()
+
     goodbye()
