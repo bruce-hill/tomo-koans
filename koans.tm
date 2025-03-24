@@ -13,7 +13,7 @@ enum TestResult(Success(output:Text), Error(err:Text), WrongOutput(actual:Text, 
         when result is Success(s):
             $Colorful"
                 @(b,u:Program Output:)
-                $s
+                @(green:$s)
             ":print()
         is Error(e):
             $Colorful"
@@ -48,7 +48,9 @@ struct Lesson(file:Path, description:Text, expected_output=none:Text):
 
 LESSONS := [
     Lesson((./lessons/lesson-01-hello-world.tm), "Hello World", "Hello world$\n"),
-    Lesson((./lessons/lesson-02.tm), "Working with Text"),
+    Lesson((./lessons/lesson-02-tests.tm), "Testing Code"),
+    Lesson((./lessons/lesson-03-variables.tm), "Variables"),
+    Lesson((./lessons/lesson-04-functions.tm), "Functions"),
 ]
 
 func ask_continue():
