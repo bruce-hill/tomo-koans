@@ -114,6 +114,8 @@ func main(clean=no):
         cp -r lesson-templates lessons
     ":run():or_fail("Could not make lessons directory")
 
+    test_results := &[l:get_result() for l in LESSONS]
+
     repeat:
         ask_continue()
         clear_screen()
@@ -122,8 +124,8 @@ func main(clean=no):
         if choice == "q" or choice == "Q": stop repeat
 
         if choice == "":
-            for i,l in LESSONS:
-                if not l:get_result():is_success():
+            for i,result in test_results:
+                if not result:is_success():
                     choice = Text(i)
                     stop
 
@@ -148,6 +150,7 @@ func main(clean=no):
             ":print()
 
             result := lesson:get_result()
+            test_results[n] = result
             result:print()
             if result:is_success():
                 stop repeat
