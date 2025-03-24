@@ -8,6 +8,14 @@ use commands
 
 editor := "vim"
 
+LESSONS := [
+    Lesson((./lessons/lesson-01-hello-world.tm), "Hello World", "Hello world$\n"),
+    Lesson((./lessons/lesson-02-tests.tm), "Testing Code"),
+    Lesson((./lessons/lesson-03-variables.tm), "Variables"),
+    Lesson((./lessons/lesson-04-functions.tm), "Functions"),
+    Lesson((./lessons/lesson-05-basic-types.tm), "Basic Types"),
+]
+
 enum TestResult(Success(output:Text), Error(err:Text), WrongOutput(actual:Text, expected:Text)):
     func print(result:TestResult):
         when result is Success(s):
@@ -45,13 +53,6 @@ struct Lesson(file:Path, description:Text, expected_output=none:Text):
                 return WrongOutput(output, expected)
 
         return Success(output)
-
-LESSONS := [
-    Lesson((./lessons/lesson-01-hello-world.tm), "Hello World", "Hello world$\n"),
-    Lesson((./lessons/lesson-02-tests.tm), "Testing Code"),
-    Lesson((./lessons/lesson-03-variables.tm), "Variables"),
-    Lesson((./lessons/lesson-04-functions.tm), "Functions"),
-]
 
 func ask_continue():
     _ := ask("$\033[2mPress Enter to continue...$\033[m", bold=no)
