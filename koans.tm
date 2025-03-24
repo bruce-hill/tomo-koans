@@ -4,6 +4,8 @@ use colorful
 use shell
 use commands
 
+editor := "vim"
+
 enum TestResult(Success(output:Text), Error(err:Text), WrongOutput(actual:Text, expected:Text)):
     func print(result:TestResult):
         when result is Success(s):
@@ -86,7 +88,53 @@ func summarize_tests(highlight=none:Path):
 
     ":print()
 
-func main(clean=no):
+func run_lesson(lesson:Lesson, result:TestResult -> TestResult):
+    repeat:
+        clear_screen()
+        $Colorful"
+
+            @(yellow,b,u:Lesson: "$(lesson.description)")
+            Here's what we have right now:
+
+        ":print()
+
+        result:print()
+        if result:is_success():
+            $Colorful"
+                @(green,b:✨ Great job, this test is passing! ✨)
+
+            ":print()
+        else:
+            $Colorful"
+                @(red,b:Looks like this test isn't passing yet! 😢)
+
+            ":print()
+
+        action := (ask("(e)dit the file and try again? Go (b)ack? Or (q)uit? ") or return result):lower()
+        if action == "e" or action == "edit":
+            $Shell"
+                $(editor) $(lesson.file)
+            ":run():or_fail("Could not open editor $(editor)")
+
+            result = lesson:get_result()
+            result:print()
+        else if action == "b" or action == "back":
+            stop
+        else if action == "q" or action == "quit":
+            goodbye()
+
+    return result
+
+func goodbye(-> Abort):
+    clear_screen()
+    $Colorful"
+
+        @(b:Goodbye! Come back again soon!)
+
+    ":print()
+    exit(code=0)
+
+func main(clean=no -> Abort):
     clear_screen()
     $Colorful"
         $\n@(bold,green:Hello and welcome to the Tomo Koans program!)
@@ -98,17 +146,25 @@ func main(clean=no):
 
     ":print()
 
-    editor := if (./editor.txt):exists():
-        (./editor.txt):read()!
-    else:
-        e := ask("What command line text editor do you want to use? ")!
-        (./editor.txt):write(e)
-        e
-
-    $Colorful"You're using @(b:$editor)$\n":print()
-
     if clean:
+        (./editor.txt):remove()
         (./lessons):remove()
+
+    if (./editor.txt):exists():
+        editor = (./editor.txt):read()!
+        $Colorful"
+            @(dim,i:You're using @(green:$(editor)) as your text editor. If you want to change it, just edit @(magenta:./editor.txt))
+
+        ":print()
+    else:
+        editor = ask("What command line text editor do you want to use? ")!
+        (./editor.txt):write(editor)
+        $Colorful"
+
+            Great! From now on, I'll use @(b:$(editor)) to edit files.
+            If you want to change it, just edit @(magenta:./editor.txt)
+
+        ":print()
 
     $Shell"
         cp -r lesson-templates lessons
@@ -116,8 +172,8 @@ func main(clean=no):
 
     test_results := &[l:get_result() for l in LESSONS]
 
+    ask_continue()
     repeat:
-        ask_continue()
         clear_screen()
         summarize_tests()
         choice := ask("Choose a test or (q)uit: ") or stop repeat
@@ -139,38 +195,6 @@ func main(clean=no):
             skip repeat
 
         lesson := LESSONS[n]
-        clear_screen()
-
-        repeat:
-            $Colorful"
-
-                @(yellow,b,u:Lesson $n: "$(lesson.description)")
-                Here's what we have right now:
-
-            ":print()
-
-            result := lesson:get_result()
-            test_results[n] = result
-            result:print()
-            if result:is_success():
-                stop repeat
-
-            summarize_tests(highlight=lesson.file)
-            action := ask("That didn't go so well. (e)dit the file and try again? Or (Q)uit? ")
-            if action:
-                if action:lower() == "e":
-                    $Shell"
-                        $editor $(lesson.file)
-                    ":run():or_fail("Could not open editor $editor")
-                    skip repeat
-
-            $Colorful"Goodbye! Come back again soon!":print()
-            return
-
-        $Colorful"
-            @(green,b:✨ Good job, that succeeded! ✨)
-
-        ":print()
+        test_results[n] = run_lesson(lesson, test_results[n])
     
-    clear_screen()
-    $Colorful"@(b:Goodbye! Come back again soon!)":print()
+    goodbye()
