@@ -148,8 +148,8 @@ func main(clean=no -> Abort):
     ":print()
 
     if clean:
-        (./editor.txt):remove()
-        (./lessons):remove()
+        (./editor.txt):remove(ignore_missing=yes)
+        (./lessons):remove(ignore_missing=yes)
 
     if (./editor.txt):exists():
         editor = (./editor.txt):read()!
@@ -158,7 +158,9 @@ func main(clean=no -> Abort):
 
         ":print()
     else:
-        editor = ask("What command line text editor do you want to use? ")!
+        editor = ask("What command line text editor do you want to use? ") or goodbye()
+        while editor == "" or not $Shell"command -v $editor >/dev/null":run():succeeded():
+            editor = ask("I don't recognize that editor. Try again? ") or goodbye()
         (./editor.txt):write(editor)
         $Colorful"
 
