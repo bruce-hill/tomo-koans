@@ -22,7 +22,7 @@ func main():
         line three
     "
 
-    # Methods calls use `:`
+    # Method calls use `:`
     >> multiline:lines()
     = [???]
 

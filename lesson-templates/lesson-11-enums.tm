@@ -6,7 +6,7 @@ enum Shape(Circle(radius: Num), Rectangle(width: Num, height: Num), Point):
     # Use `when` to pattern match an enum:
     func area(shape: Shape -> Num):
         when shape is Circle(radius):
-            return Num.PI * radius * radius
+            return Num.PI * radius^2
         is Rectangle(width, height):
             return width * height
         is Point:
@@ -15,23 +15,23 @@ enum Shape(Circle(radius: Num), Rectangle(width: Num, height: Num), Point):
 func main():
 
     # You can create instances of an enum:
-    s1 := Shape.Point
+    point := Shape.Point
 
     # Single member enums display without the field names:
-    s2 := Circle(radius=10)
-    >> s1
+    circle := Shape.Circle(radius=10)
+    >> circle
     = Circle(10)
 
     # Multi-member enums explicitly list their field names:
-    s3 := Shape.Rectangle(width=4, height=5)
-    >> s3
+    rect := Shape.Rectangle(width=4, height=5)
+    >> rect
     = Rectangle(width=4, height=5)
 
-    >> s1:area()
+    >> point:area()
     = ???
 
-    >> s2:area()
+    >> rect:area()
     = ???
 
-    >> "My shape is $s3"
+    >> "My shape is $circle"
     = ???

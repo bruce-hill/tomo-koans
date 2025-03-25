@@ -5,43 +5,40 @@ func main():
     # Tomo includes a built-in literal type for file paths
     # A path is inside parentheses and begins with `/`, `~`, `.` or `..`
 
-    file := (/tmp/test-file.txt)
-    >> file
+    path := (/tmp/test-file.txt)
+    >> path
     = /tmp/test-file.txt
 
-    file:write("first line")
-    >> file:read()
+    path:write("first line")
+    >> path:read()
     = "???"
 
-    file:append("
+    path:append("
 
         second line
     ")
 
-    >> file:exists()
+    >> path:exists()
     = yes
 
-    >> file:lines()
-    = [???]
-
     # You can iterate over a file by lines:
-    >> upper_lines := [line:upper() for line in file:by_line()]
+    >> upper_lines := [line:upper() for line in path:by_line()!]
     = [???]
 
-    >> file:parent()
+    >> path:parent()
     = /???
 
-    >> file:extension()
+    >> path:extension()
     = "???"
 
-    >> file:parent():child("other-file.txt")
+    >> path:parent():child("other-file.txt")
     = /???
 
     >> dir := (/tmp/test-*.txt):glob()
     = [???]
 
-    file:remove()
+    path:remove()
 
-    >> file:exists()
+    >> path:exists()
     = ???
 

@@ -71,7 +71,7 @@ func ask_continue():
 func clear_screen():
     say("$\x1b[2J$\x1b[H", newline=no)
 
-func summarize_tests(highlight=none:Path):
+func summarize_tests(results:[TestResult], highlight=none:Path):
     $Colorful"
         
         @(yellow,b,u:Lessons)
@@ -80,7 +80,7 @@ func summarize_tests(highlight=none:Path):
     passing := 0
     failing := 0
     for i,lesson in LESSONS:
-        result := lesson:get_result()
+        result := results[i]
         if result:is_success():
             passing += 1
             $Colorful"
@@ -104,12 +104,23 @@ func summarize_tests(highlight=none:Path):
 
     ":print()
 
+func short_summarize_tests(results:[TestResult]):
+    say("Progress: ", newline=no)
+    for result in results:
+        if result:is_success():
+            $Colorful"@(green,bold:#)":print(newline=no)
+        else:
+            $Colorful"@(red,dim:#)":print(newline=no)
+
+    say(\n)
+
 func choose_option(options:{Text,Text} -> Text):
     repeat:
         for k,v in options:
             $Colorful"
                 @(b:($k)) $v
             ":print()
+        say("")
         choice := (ask("Choose an option: ") or goodbye()):lower():to(1)
         if options:has(choice):
             return choice
@@ -194,7 +205,7 @@ func main(clean=no -> Abort):
     ask_continue()
     repeat:
         clear_screen()
-        summarize_tests()
+        summarize_tests(test_results)
         choice := ask("Choose a test or (q)uit: ") or stop repeat
         if choice == "q" or choice == "Q": stop repeat
 
@@ -216,6 +227,7 @@ func main(clean=no -> Abort):
         repeat:
             lesson := LESSONS[n]
             show_lesson(lesson, test_results[n])
+            short_summarize_tests(test_results)
 
             options := &{
                 "e"="Edit file and try again",

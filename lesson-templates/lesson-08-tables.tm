@@ -27,7 +27,7 @@ func main():
         total += score
 
     >> total
-    = 9999
+    = ???
 
     # Table keys and values can be accessed as an array:
     >> scores.keys

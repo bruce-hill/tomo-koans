@@ -9,7 +9,7 @@ struct Point(x:Int, y:Int):
 
     # There is no implicit `self` argument, only the
     # arguments you explicitly define.
-    func absolute(p:Point -> Point):
+    func abs(p:Point -> Point):
         return Point(p.x:abs(), p.y:abs())
     
     # Constants can be declared inside of a struct's namespace:
@@ -22,7 +22,7 @@ struct Point(x:Int, y:Int):
 func main():
 
     # You can create a struct instance like this:
-    p := Point(x=3, y=4)
+    p := Point(x=3, y=-4)
 
     >> p
     = Point(x=???, y=???)
@@ -35,8 +35,12 @@ func main():
     >> p.y
     = ???
 
-    >> p.sum()
+    >> p:abs()
     = ???
 
     >> Point.squared_int(5)
     = ???
+
+    >> Int.abs(-2)
+
+    >> -2:abs()
