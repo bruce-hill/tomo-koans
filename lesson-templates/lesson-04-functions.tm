@@ -23,4 +23,4 @@ func main():
 func add(x:Int, y:Int -> Int):
 
     # Fix this so it returns a sensible result:
-    return 0
+    return ???
