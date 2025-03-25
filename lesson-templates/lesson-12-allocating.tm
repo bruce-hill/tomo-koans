@@ -36,7 +36,7 @@ func main():
 
     # Without `@`, attempting to mutate will cause an error:
     frozen := {"key"="value"}
-    frozen["key"] = "new value"  # This should fail
+    frozen["key"] = "new value" # <- This will break, comment it out
 
     >> frozen["key"]
-    = "new value"
+    = "value"?
