@@ -22,6 +22,9 @@ LESSONS := [
     Lesson((./lessons/lesson-11-enums.tm), "Enums"),
     Lesson((./lessons/lesson-12-allocating.tm), "Allocating Memory"),
     Lesson((./lessons/lesson-13-paths.tm), "File Paths"),
+    Lesson((./lessons/lesson-14-langs.tm), "Embedded Languages"),
+    Lesson((./lessons/lesson-15-min-max.tm), "Min and Max"),
+    Lesson((./lessons/lesson-16-reducers.tm), "Reducers"),
 ]
 
 enum TestResult(Success(output:Text), Error(err:Text), WrongOutput(actual:Text, expected:Text)):
