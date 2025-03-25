@@ -11,7 +11,7 @@ func main():
     # If an empty argument is given, a `none` value is returned
     empty := [:Int]
     >> (+: empty)
-    = none
+    = none:Int
 
     # Use `or` to provide a fallback:
     >> (+: empty) or 100
