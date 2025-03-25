@@ -17,7 +17,7 @@ func main():
 
     # Variables are strongly typed, so you can't
     # assign different types to the same variable:
-    x = "hello"
+    x = "hello" # <-- This will error, comment it out or fix it
 
     # Declare a variable called `y` and give it the
     # value "okay"
