@@ -20,12 +20,12 @@ func main():
     # Single member enums display without the field names:
     circle := Shape.Circle(radius=10)
     >> circle
-    = Circle(10)
+    = Shape.Circle(10)
 
     # Multi-member enums explicitly list their field names:
     rect := Shape.Rectangle(width=4, height=5)
     >> rect
-    = Rectangle(width=4, height=5)
+    = Shape.Rectangle(width=4, height=5)
 
     >> point:area()
     = ???
