@@ -28,4 +28,4 @@ func main():
     = ???
 
     >> (+: i for i in 10 if i:is_prime())!
-    = 0
+    = ???

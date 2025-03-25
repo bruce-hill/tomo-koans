@@ -18,7 +18,10 @@ func main():
     >> y
     = ???
 
-    # Some functions return optional values:
+    # Some functions return optional values.
+    # Int.parse(text:Text -> Int?) is a function that returns
+    # an integer value found in the text, or `none` if no integer
+    # is found.
     >> Int.parse("123")
     = ???
     >> Int.parse("blah")
