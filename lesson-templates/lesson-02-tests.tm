@@ -11,7 +11,7 @@ func main():
     # If you don't provide an expected value,
     # the expression will just be printed out
     # and not checked:
-    >> 2 + 3
+    >> 20 + 30
 
     # If a docstring test's output is different
     # from what was expected, it will print an
