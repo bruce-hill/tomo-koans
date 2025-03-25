@@ -6,7 +6,7 @@ func main():
     # - Int (integer numbers)
     # - Num (floating-point numbers)
     # - Text (string values)
-    # - Bool (true or false)
+    # - Bool (yes or no)
 
     # Fix these variables so they match the expected values:
     
