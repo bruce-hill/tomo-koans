@@ -27,9 +27,11 @@ LESSONS := [
     Lesson((./lessons/lesson-16-reducers.tm), "Reducers"),
 ]
 
-enum TestResult(Success(output:Text), Error(err:Text), WrongOutput(actual:Text, expected:Text)):
+enum TestResult(NotRun, Success(output:Text), Error(err:Text), WrongOutput(actual:Text, expected:Text)):
     func print(result:TestResult):
-        when result is Success(s):
+        when result is NotRun:
+            pass
+        is Success(s):
             $Colorful"
                 @(b,u:Program Output:)
                 @(green:$s)
@@ -80,22 +82,21 @@ func summarize_tests(results:[TestResult], highlight=none:Path):
     passing := 0
     failing := 0
     for i,lesson in LESSONS:
-        result := results[i]
-        if result:is_success():
+        when results[i] is Success:
             passing += 1
             $Colorful"
                 @(green,bold:$(Text(i):left_pad(2)): "$(lesson.description)" (passes))
             ":print()
+        is NotRun:
+            failing += 1
+            $Colorful"
+                @(dim:$(Text(i):left_pad(2)): "$(lesson.description)" (not yet attempted))
+            ":print()
         else:
             failing += 1
-            if lesson.file == highlight or (highlight == none:Path and failing == 1):
-                $Colorful"
-                    @(red:$(Text(i):left_pad(2)): "$(lesson.description)" (not yet passing))
-                ":print()
-            else:
-                $Colorful"
-                    @(dim:$(Text(i):left_pad(2)): "$(lesson.description)" (not yet passing))
-                ":print()
+            $Colorful"
+                @(red:$(Text(i):left_pad(2)): "$(lesson.description)" (failing))
+            ":print()
 
     completed := (Num(passing)/Num(passing+failing))!
     $Colorful"
@@ -107,10 +108,12 @@ func summarize_tests(results:[TestResult], highlight=none:Path):
 func short_summarize_tests(results:[TestResult]):
     say("Progress: ", newline=no)
     for result in results:
-        if result:is_success():
+        when result is Success:
             $Colorful"@(green,bold:#)":print(newline=no)
+        is NotRun:
+            $Colorful"@(dim:#)":print(newline=no)
         else:
-            $Colorful"@(red,dim:#)":print(newline=no)
+            $Colorful"@(red:#)":print(newline=no)
 
     say(\n)
 
@@ -142,9 +145,14 @@ func show_lesson(lesson:Lesson, result:TestResult):
     ":print()
 
     result:print()
-    if result:is_success():
+    when result is Success:
         $Colorful"
             @(green,b:✨ Great job, this test is passing! ✨)
+
+        ":print()
+    is NotRun:
+        $Colorful"
+            @(dim,italic:...nothing, edit the file to make your first attempt...)
 
         ":print()
     else:
@@ -200,7 +208,7 @@ func main(clean=no -> Abort):
         cp -r lesson-templates lessons
     ":run():or_fail("Could not make lessons directory")
 
-    test_results := &[l:get_result() for l in LESSONS]
+    test_results := &[TestResult.NotRun for l in LESSONS]
 
     ask_continue()
     repeat:
