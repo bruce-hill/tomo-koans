@@ -14,6 +14,14 @@ LESSONS := [
     Lesson((./lessons/lesson-03-variables.tm), "Variables"),
     Lesson((./lessons/lesson-04-functions.tm), "Functions"),
     Lesson((./lessons/lesson-05-basic-types.tm), "Basic Types"),
+    Lesson((./lessons/lesson-06-arrays.tm), "Arrays"),
+    Lesson((./lessons/lesson-07-optionals.tm), "Optionals"),
+    Lesson((./lessons/lesson-08-tables.tm), "Tables"),
+    Lesson((./lessons/lesson-09-text), "Text"),
+    Lesson((./lessons/lesson-10-structs.tm), "Structs"),
+    Lesson((./lessons/lesson-11-enums.tm), "Enums"),
+    Lesson((./lessons/lesson-12-allocating.tm), "Allocating Memory"),
+    Lesson((./lessons/lesson-13-paths.tm), "File Paths"),
 ]
 
 enum TestResult(Success(output:Text), Error(err:Text), WrongOutput(actual:Text, expected:Text)):

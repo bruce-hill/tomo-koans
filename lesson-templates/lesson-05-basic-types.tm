@@ -17,17 +17,17 @@ func main():
     d := yes
 
     >> a
-    = 99
+    = ???
     >> b
-    = 2.718
+    = ???
     >> c
-    = "Hello, world!"
+    = ???
     >> d
-    = no
+    = ???
 
     # Text values support interpolation using `$`:
     name := "Alice"
     greeting := "Hello, $name!"
 
     >> greeting
-    = "Hello, Bob!"
+    = ???

@@ -19,8 +19,4 @@ func main():
 
     # Edit this test so it passes:
     >> 2 + 2
-    = 9999
-
-    # For the rest of this tutorial, you won't
-    # be editing any of the tests, you'll be
-    # fixing code so it passes the tests.
+    = ???
