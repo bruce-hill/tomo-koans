@@ -19,7 +19,7 @@ func main():
     # Tables can be empty but must have key and value types:
     empty := {:Text,Int}
     >> empty
-    = {}
+    = {:Text,Int}
 
     # You can loop over tables:
     total := 0

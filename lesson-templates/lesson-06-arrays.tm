@@ -15,7 +15,7 @@ func main():
     empty := [:Int]
 
     >> empty
-    = []
+    = [:Int]
 
     # You can loop over an array with `for value in array`:
     sum := 0
