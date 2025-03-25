@@ -7,26 +7,19 @@ func main():
 
     path := (/tmp/test-file.txt)
     >> path
-    = /tmp/test-file.txt
+    = (/tmp/test-file.txt)
 
-    path:write("first line")
+    path:write("first")
     >> path:read()
     = "???"
 
-    path:append("
-
-        second line
-    ")
+    path:append(",second")
 
     >> path:exists()
     = yes
 
-    # You can iterate over a file by lines:
-    >> upper_lines := [line:upper() for line in path:by_line()!]
-    = [???]
-
     >> path:parent()
-    = /???
+    = (/???)
 
     >> path:extension()
     = "???"
