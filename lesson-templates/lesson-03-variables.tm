@@ -22,6 +22,7 @@ func main():
     # Declare a variable called `y` and give it the
     # value "okay"
 
+    ???
 
     >> y
     = "okay"
