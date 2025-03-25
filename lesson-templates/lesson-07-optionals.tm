@@ -7,7 +7,7 @@ func main():
 
     x := 42?
     >> x
-    = x
+    = 42
 
     # You can assign a `none` value to `x` because it has type `Int?`
     x = none

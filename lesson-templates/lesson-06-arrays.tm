@@ -26,7 +26,7 @@ func main():
     = ???
 
     # Array comprehensions let you transform arrays concisely:
-    squares := [n + 1 for n in nums]
+    squares := [n*n for n in nums]
 
     >> squares
     = [???]
