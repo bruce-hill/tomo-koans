@@ -40,7 +40,3 @@ func main():
 
     >> Point.squared_int(5)
     = ???
-
-    >> Int.abs(-2)
-
-    >> -2:abs()
