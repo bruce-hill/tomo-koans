@@ -25,7 +25,7 @@ func main():
     = "???"
 
     >> path:parent():child("other-file.txt")
-    = /???
+    = (/???)
 
     >> dir := (/tmp/test-*.txt):glob()
     = [???]

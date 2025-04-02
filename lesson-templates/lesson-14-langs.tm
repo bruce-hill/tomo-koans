@@ -5,7 +5,7 @@ lang HTML:
 
     # Custom escaping rules can be created with `convert`
     convert(t:Text -> HTML):
-        t = t:replace_all({$/&/="&amp;", $/</="&lt;", $/>/="&gt;"})
+        t = t:translate({"&"="&amp;", "<"="&lt;", ">"="&gt;"})
         return HTML.from_text(t)
 
     func paragraph(content:HTML -> HTML):
