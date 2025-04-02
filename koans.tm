@@ -117,7 +117,7 @@ func short_summarize_tests(results:[TestResult]):
 
     say(\n)
 
-func choose_option(options:{Text,Text} -> Text):
+func choose_option(options:{Text=Text} -> Text):
     repeat:
         for k,v in options:
             $Colorful"
