@@ -1,6 +1,6 @@
 # Basic Types
 
-func main():
+func main()
 
     # Tomo has several built-in types, including:
     # - Int (integer numbers)
@@ -27,7 +27,7 @@ func main():
 
     # Text values support interpolation using `$`:
     name := "Alice"
-    greeting := "Hello, $name!"
+    greeting := "Hello $name!"
 
     >> greeting
     = ???

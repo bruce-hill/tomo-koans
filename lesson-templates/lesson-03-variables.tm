@@ -1,6 +1,6 @@
 # Variables
 
-func main():
+func main()
 
     # Variable declarations use `:=` and do not
     # require you to specify a type explicitly:

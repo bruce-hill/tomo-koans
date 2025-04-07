@@ -1,6 +1,6 @@
 # Optional Types
 
-func main():
+func main()
 
     # Any type `T` can be made optional with the syntax `T?`,
     # meaning it can hold a value or be `none`.
@@ -13,7 +13,7 @@ func main():
     x = none
 
     # To declare a `none` variable, specify its type:
-    y := none:Int
+    y : Int? = none
 
     >> y
     = ???
@@ -29,18 +29,18 @@ func main():
 
     # You can check if a value exists with `if`:
     n := Int.parse("123")
-    if n:
+    if n
         # Inside this condition, `n` is known to be non-none
         n = add(n, 1)
         >> n
         = ???
 
     # Optionals are useful for handling missing data:
-    name := none:Text
-    greeting := if name:
-        "Hello, $name!"
-    else:
-        "Hello, stranger!"
+    name : Text? = none
+    greeting := if name
+        "Hello $name!"
+    else
+        "Hello stranger!"
 
     >> greeting
     = ???
@@ -54,5 +54,5 @@ func main():
     >> add(Int.parse("123")!, 1)
     = ???
 
-func add(x:Int, y:Int -> Int):
+func add(x:Int, y:Int -> Int)
     return x + y

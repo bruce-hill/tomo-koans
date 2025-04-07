@@ -1,6 +1,6 @@
 # Tables
 
-func main():
+func main()
 
     # Tables store key-value pairs.
     # You can define a table using `{key = value, ...}`.
@@ -17,13 +17,13 @@ func main():
     = ???
 
     # Tables can be empty but must have key and value types:
-    empty := {:Text=Int}
+    empty : {Text=Int} = {}
     >> empty
-    = {:Text=Int}
+    = {}
 
     # You can loop over tables:
     total := 0
-    for name, score in scores:
+    for name, score in scores
         total += score
 
     >> total

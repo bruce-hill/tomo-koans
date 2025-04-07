@@ -3,7 +3,7 @@
 # Lines beginning with a '#' are comments
 
 # Programs need a main() function to run:
-func main():
+func main()
 
     # The language is indentation-sensitive, so indentation matters!
 

@@ -1,6 +1,6 @@
 # Arrays
 
-func main():
+func main()
 
     # Arrays are ordered collections of values.
     # You can define an array using `[...]`:
@@ -12,14 +12,14 @@ func main():
     = ???
 
     # Arrays can be empty but must have a type:
-    empty := [:Int]
+    empty : [Int] = []
 
     >> empty
-    = [:Int]
+    = []
 
     # You can loop over an array with `for value in array`:
     sum := 0
-    for num in nums:
+    for num in nums
         sum += num
 
     >> sum
@@ -32,6 +32,6 @@ func main():
     = [???]
 
     # You can also get the index with `for index, value in array`:
-    for i, num in nums:
+    for i, num in nums
         >> squares[i] == num * num
         = yes

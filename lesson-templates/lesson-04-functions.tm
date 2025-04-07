@@ -1,6 +1,6 @@
 # Functions
 
-func main():
+func main()
 
     # Functions can be declared in any order.
     # The main() function is the first function to run,
@@ -20,7 +20,7 @@ func main():
 
 # Functions are defined using `func` and must specify
 # the types of their arguments and return values like this:
-func add(x:Int, y:Int -> Int):
+func add(x:Int, y:Int -> Int)
 
     # Fix this so it returns a sensible result:
     return ???

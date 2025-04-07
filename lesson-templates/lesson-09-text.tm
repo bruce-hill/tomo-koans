@@ -1,6 +1,6 @@
 # Text
 
-func main():
+func main()
 
     # Text values are sequences of letters.
     greeting := "Hello"
@@ -10,7 +10,7 @@ func main():
 
     # Text supports interpolation with `$`:
     name := "Alice"
-    message := "Hello, $name, your number is $(1 + 2)!"
+    message := "Hello $name, your number is $(1 + 2)!"
 
     >> message
     = ???
@@ -22,13 +22,13 @@ func main():
         line three
     "
 
-    # Method calls use `:`
-    >> multiline:lines()
+    # Method calls use `.`
+    >> multiline.lines()
     = [???]
 
     # Common text methods:
-    >> "hello":upper()
+    >> "hello".upper()
     = ???
 
-    >> "hello":split()
+    >> "hello world".split(" ")
     = [???]

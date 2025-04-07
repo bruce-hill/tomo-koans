@@ -1,6 +1,6 @@
 # Reductions
 
-func main():
+func main()
 
     # Reductions fold collections into a single value:
     >> (+: [1, 2, 3])!
@@ -9,9 +9,9 @@ func main():
     = ???
 
     # If an empty argument is given, a `none` value is returned
-    empty := [:Int]
+    empty : [Int] = []
     >> (+: empty)
-    = none:Int
+    = none
 
     # Use `or` to provide a fallback:
     >> (+: empty) or 100
@@ -27,5 +27,5 @@ func main():
     >> (+: i * 2 for i in [1, 2, 3])!
     = ???
 
-    >> (+: i for i in 10 if i:is_prime())!
+    >> (+: i for i in 10 if i.is_prime())!
     = ???

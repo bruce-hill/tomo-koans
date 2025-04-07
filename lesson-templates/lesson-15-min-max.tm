@@ -2,7 +2,7 @@
 
 struct Point(x:Int, y:Int)
 
-func main():
+func main()
 
     # `_min_` and `_max_` return the smaller or larger of two values:
     >> 7 _min_ 3
@@ -18,5 +18,5 @@ func main():
     = [???]
 
     # You can also use a method for choosing a maximum:
-    >> 5 _max_:abs() -999
+    >> 5 _max_.abs() -999
     = ???

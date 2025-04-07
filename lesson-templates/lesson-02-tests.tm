@@ -1,6 +1,6 @@
 # Docstring Tests
 
-func main():
+func main()
     # Docstring tests begin with `>>` and can
     # be used to check that a value is what you
     # expected it to be:

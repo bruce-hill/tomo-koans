@@ -1,6 +1,6 @@
 # Heap Allocation with `@`
 
-func main():
+func main()
 
     # By default, values in Tomo are immutable.
     # To allow mutation, you need to allocate memory using `@`
@@ -11,7 +11,7 @@ func main():
     >> nums
     = @[???, 2, 3]
 
-    nums:insert(40)
+    nums.insert(40)
     >> nums
     = @[???, 2, 3, ???]
 
