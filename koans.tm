@@ -58,9 +58,9 @@ struct Lesson(file:Path, description:Text, expected_output:Text?=none)
     func get_result(l:Lesson -> TestResult)
         result := $Shell"COLOR=1 tomo -O 0 $(l.file)".result()
         if not result.succeeded()
-            return Error(Text.from_bytes(result.stderr)!)
+            return Error(Text.from_bytes(result.errors)!)
 
-        output := Text.from_bytes(result.stdout)!
+        output := Text.from_bytes(result.output)!
         if expected := l.expected_output
             if output != expected
                 return WrongOutput(output, expected)
