@@ -7,6 +7,7 @@ use shell
 use commands
 
 editor := "vim"
+user : Text?
 
 LESSONS := [
     Lesson((./lessons/lesson-01-hello-world.tm), "Hello World", "Hello world\n"),
@@ -170,6 +171,15 @@ func goodbye(-> Abort)
     ".print()
     exit(code=0)
 
+func give_feedback(section:Text)
+    clear_screen()
+    user = user or ask("What name do go by? (optional) ") or "anon"
+    if user == "" then user = "anon"
+    feedback := ask("What's your feedback? ") or return
+    (./feedback.txt).append("
+        [$(user!)/$section] $feedback\n
+    ")
+
 func main(clean=no -> Abort)
     clear_screen()
     $Colorful"
@@ -219,8 +229,12 @@ func main(clean=no -> Abort)
         message_pending = no
 
         summarize_tests(test_results)
-        choice := ask("Choose a test or (q)uit: ") or stop repeat
+        choice := ask("Choose a test, (q)uit, or give (f)eedback: ") or stop repeat
         stop repeat if choice == "q" or choice == "Q"
+
+        if choice == "f" or choice == "F"
+            give_feedback("menu")
+            skip
 
         if choice == ""
             for i,result in test_results
@@ -248,6 +262,7 @@ func main(clean=no -> Abort)
                 "e"="Edit file and try again",
                 "l"="Show the lesson list",
                 "q"="Quit",
+                "f"="Give Feedback",
             }
             if n < LESSONS.length
                 options["n"] = "Go to the next lesson"
@@ -265,5 +280,7 @@ func main(clean=no -> Abort)
                 n += 1
             is "q"
                 goodbye()
+            is "f"
+                give_feedback("lesson$n")
 
     goodbye()
