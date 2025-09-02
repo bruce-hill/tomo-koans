@@ -212,8 +212,12 @@ func main(clean=no -> Abort)
     test_results := &[TestResult.NotRun for l in LESSONS]
 
     ask_continue()
+    message_pending := no
     repeat
-        clear_screen()
+        unless message_pending
+            clear_screen()
+        message_pending = no
+
         summarize_tests(test_results)
         choice := ask("Choose a test or (q)uit: ") or stop repeat
         stop repeat if choice == "q" or choice == "Q"
@@ -226,11 +230,13 @@ func main(clean=no -> Abort)
 
         n := Int.parse(choice) or (do
             $Colorful"@(red:I don't know what that means! Type a test number or 'q'.)".print()
+            message_pending = yes
             skip repeat
         )
 
         if n < 1 or n > LESSONS.length
             $Colorful"@(red:That's not a valid test number!)".print()
+            message_pending = yes
             skip repeat
 
         repeat
