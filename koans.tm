@@ -204,7 +204,14 @@ func main(clean=no -> Abort)
 
         ".print()
     else
-        editor = ask("What command line text editor do you want to use? ") or goodbye()
+        editor = ask("
+            What command line text editor do you want to use?
+
+                Ones with syntax highlighting: vim, nvim, emacs
+                Simpler editors: nano, pico, edit
+
+            editor:$(" ")
+        ") or goodbye()
         while editor == "" or not $Shell"command -v $editor >/dev/null".run().succeeded()
             editor = ask("I don't recognize that editor. Try again? ") or goodbye()
         (./editor.txt).write(editor)
