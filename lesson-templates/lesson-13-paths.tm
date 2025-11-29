@@ -6,32 +6,24 @@ func main()
     # A path is inside parentheses and begins with `/`, `~`, `.` or `..`
 
     path := (/tmp/test-file.txt)
-    >> path
-    = (/tmp/test-file.txt)
+    assert path == (/tmp/test-file.txt)
 
     path.write("first")
-    >> path.read()
-    = "???"
+    assert path.read() == "???"
 
     path.append(",second")
 
-    >> path.exists()
-    = yes
+    assert path.exists() == yes
 
-    >> path.parent()
-    = (/???)
+    assert path.parent() == (/???)
 
-    >> path.extension()
-    = "???"
+    assert path.extension() == "???"
 
-    >> path.parent().child("other-file.txt")
-    = (/???)
+    assert path.parent().child("other-file.txt") == (/???)
 
-    >> dir := (/tmp/test-*.txt).glob()
-    = [???]
+    assert (/tmp/test-*.txt).glob() == [???]
 
     path.remove()
 
-    >> path.exists()
-    = ???
+    assert path.exists() == ???
 

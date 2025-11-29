@@ -9,14 +9,11 @@ func main()
 
     # Here, we're calling a function defined below.
     # Fix up the function so it passes thes tests:
-    >> add(5, 10)
-    = 15
-    >> add(2, 4)
-    = 6
+    assert add(5, 10) == 15
+    assert add(2, 4) == 6
 
     # Functions can also be called with keyword arguments:
-    >> add(x=4, y=12)
-    = 16
+    assert add(x=4, y=12) == 16
 
 # Functions are defined using `func` and must specify
 # the types of their arguments and return values like this:

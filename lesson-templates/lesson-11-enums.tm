@@ -19,19 +19,14 @@ func main()
 
     # Single member enums display without the field names:
     circle := Shape.Circle(radius=10)
-    >> circle
-    = Shape.Circle(10)
+    assert circle == Shape.Circle(10)
 
     # Multi-member enums explicitly list their field names:
     rect := Shape.Rectangle(width=4, height=5)
-    >> rect
-    = Shape.Rectangle(width=4, height=5)
+    assert rect == Shape.Rectangle(width=4, height=5)
 
-    >> point.area()
-    = ???
+    assert point.area() == ???
 
-    >> rect.area()
-    = ???
+    assert rect.area() == ???
 
-    >> "My shape is $circle"
-    = ???
+    assert "My shape is $circle" == ???

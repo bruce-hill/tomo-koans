@@ -5,7 +5,7 @@ lang HTML
 
     # Custom escaping rules can be created with `convert`
     convert(t:Text -> HTML)
-        t = t.translate({"&"="&amp;", "<"="&lt;", ">"="&gt;"})
+        t = t.translate({"&": "&amp;", "<": "&lt;", ">": "&gt;"})
         return HTML.from_text(t)
 
     func paragraph(content:HTML -> HTML)
@@ -22,10 +22,8 @@ func main()
 
     safe := $HTML"User said: $malicious_input"
 
-    >> safe
-    = ???
+    assert safe == ???
 
-    >> safe.paragraph()
-    = ???
+    assert safe.paragraph() == ???
 
-    greeting := greet(malicious_input)  # This should fail
+    greeting := greet(malicious_input)  # This won't compile

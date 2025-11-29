@@ -59,9 +59,9 @@ struct Lesson(file:Path, description:Text, expected_output:Text?=none)
     func get_result(l:Lesson -> TestResult)
         result := $Shell"COLOR=1 tomo -O 0 $(l.file)".result()
         if not result.succeeded()
-            return Error(Text.from_bytes(result.errors)!)
+            return Error(Text.from_utf8(result.errors)!)
 
-        output := Text.from_bytes(result.output)!
+        output := Text.from_utf8(result.output)!
         if expected := l.expected_output
             if output != expected
                 return WrongOutput(output, expected)
@@ -83,7 +83,7 @@ func summarize_tests(results:[TestResult], highlight:Path?=none)
     passing := 0
     failing := 0
     for i,lesson in LESSONS
-        when results[i] is Success
+        when results[i]! is Success
             passing += 1
             $Colorful"
                 @(green,bold:$(Text(i).left_pad(2)): "$(lesson.description)" (passes))
@@ -118,7 +118,7 @@ func short_summarize_tests(results:[TestResult])
 
     say("\n")
 
-func choose_option(options:{Text=Text} -> Text)
+func choose_option(options:{Text:Text} -> Text)
     repeat
         for k,v in options
             $Colorful"
@@ -261,15 +261,15 @@ func main(clean=no -> Abort)
             skip repeat
 
         repeat
-            lesson := LESSONS[n]
-            show_lesson(lesson, test_results[n])
+            lesson := LESSONS[n]!
+            show_lesson(lesson, test_results[n]!)
             short_summarize_tests(test_results)
 
             options := &{
-                "e"="Edit file and try again",
-                "l"="Show the lesson list",
-                "q"="Quit",
-                "f"="Give Feedback",
+                "e": "Edit file and try again",
+                "l": "Show the lesson list",
+                "q": "Quit",
+                "f": "Give Feedback",
             }
             if n < LESSONS.length
                 options["n"] = "Go to the next lesson"
@@ -280,7 +280,7 @@ func main(clean=no -> Abort)
                 ".run().or_fail("Could not open editor $(editor)")
 
                 test_results[n] = lesson.get_result()
-                test_results[n].print()
+                test_results[n]!.print()
             is "l"
                 stop
             is "n"

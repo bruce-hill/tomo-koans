@@ -12,8 +12,7 @@ func main()
     # You can also use update assignments like `+=`
     x += 1
 
-    >> x
-    = 1000
+    assert x == 1000
 
     # Variables are strongly typed, so you can't
     # assign different types to the same variable:
@@ -24,5 +23,4 @@ func main()
 
     ???
 
-    >> y
-    = "okay"
+    assert y == "okay"

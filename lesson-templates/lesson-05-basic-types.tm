@@ -16,18 +16,13 @@ func main()
     # Boolean values use `yes`/`no`, not `true`/`false`
     d := yes
 
-    >> a
-    = ???
-    >> b
-    = ???
-    >> c
-    = ???
-    >> d
-    = ???
+    assert a == ???
+    assert b == ???
+    assert c == ???
+    assert d == ???
 
     # Text values support interpolation using `$`:
     name := "Alice"
-    greeting := "Hello $name!"
+    greeting := "Hello $name"
 
-    >> greeting
-    = ???
+    assert greeting == ???

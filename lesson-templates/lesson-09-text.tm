@@ -5,15 +5,13 @@ func main()
     # Text values are sequences of letters.
     greeting := "Hello"
 
-    >> greeting.length
-    = ???
+    assert greeting.length == ???
 
     # Text supports interpolation with `$`:
     name := "Alice"
-    message := "Hello $name, your number is $(1 + 2)!"
+    message := "Hello $name, your number is $(1 + 2)"
 
-    >> message
-    = ???
+    assert message == ???
 
     # Multi-line text uses indented quotes:
     multiline := "
@@ -23,12 +21,9 @@ func main()
     "
 
     # Method calls use `.`
-    >> multiline.lines()
-    = [???]
+    assert multiline.lines() == [???]
 
     # Common text methods:
-    >> "hello".upper()
-    = ???
+    assert "hello".upper() == ???
 
-    >> "hello world".split(" ")
-    = [???]
+    assert "hello world".split(" ") == [???]

@@ -3,29 +3,21 @@
 func main()
 
     # Reductions fold collections into a single value:
-    >> (+: [1, 2, 3])!
-    = ???
-    >> (*: [2, 3, 4])!
-    = ???
+    assert (+: [1, 2, 3])! == ???
+    assert (*: [2, 3, 4])! == ???
 
     # If an empty argument is given, a `none` value is returned
     empty : [Int] = []
-    >> (+: empty)
-    = none
+    assert (+: empty) == none
 
     # Use `or` to provide a fallback:
-    >> (+: empty) or 100
-    = ???
+    assert (+: empty) or 100 == ???
 
     # `_min_` and `_max_` work as reducers:
-    >> (_max_: [10, 30, 20])!
-    = ???
-    >> (_min_.length: ["x", "abcd", "yz"])!
-    = "???"
+    assert (_max_: [10, 30, 20])! == ???
+    assert (_min_.length: ["x", "abcd", "yz"])! == "???"
 
     # Comprehensions inside reductions:
-    >> (+: i * 2 for i in [1, 2, 3])!
-    = ???
+    assert (+: i * 2 for i in [1, 2, 3])! == ???
 
-    >> (+: i for i in 10 if i.is_prime())!
-    = ???
+    assert (+: i for i in 10 if i.is_prime())! == ???

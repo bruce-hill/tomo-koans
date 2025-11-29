@@ -24,19 +24,13 @@ func main()
     # You can create a struct instance like this:
     p := Point(x=3, y=-4)
 
-    >> p
-    = Point(x=???, y=???)
+    assert p == Point(x=???, y=???)
 
-    >> Point.ZERO
-    = Point(x=???, y=???)
+    assert Point.ZERO == Point(x=???, y=???)
 
-    >> p.x
-    = ???
-    >> p.y
-    = ???
+    assert p.x == ???
+    assert p.y == ???
 
-    >> p.abs()
-    = ???
+    assert p.abs() == ???
 
-    >> Point.squared_int(5)
-    = ???
+    assert Point.squared_int(5) == ???

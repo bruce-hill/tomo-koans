@@ -8,30 +8,25 @@ func main()
     nums := [10, 20, 30]
 
     # Arrays are 1-indexed.
-    >> nums[2]
-    = ???
+    assert nums[2] == ???
 
     # Arrays can be empty but must have a type:
     empty : [Int] = []
 
-    >> empty
-    = []
+    assert empty == []
 
     # You can loop over an array with `for value in array`:
     sum := 0
     for num in nums
         sum += num
 
-    >> sum
-    = ???
+    assert sum == ???
 
     # Array comprehensions let you transform arrays concisely:
     squares := [n*n for n in nums]
 
-    >> squares
-    = [???]
+    assert squares == [???, ???, ???]
 
     # You can also get the index with `for index, value in array`:
     for i, num in nums
-        >> squares[i] == num * num
-        = yes
+        assert squares[i] == num * num
