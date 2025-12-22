@@ -178,7 +178,7 @@ func give_feedback(section:Text)
     feedback := ask("What's your feedback? ") or return
     (./feedback.txt).append("
         [$(user!)/$section] $feedback\n
-    ")
+    ")!
 
 func main(clean=no -> Abort)
     clear_screen()
@@ -194,8 +194,8 @@ func main(clean=no -> Abort)
     ".print()
 
     if clean
-        (./editor.txt).remove(ignore_missing=yes)
-        (./lessons).remove(ignore_missing=yes)
+        (./editor.txt).remove(ignore_missing=yes)!
+        (./lessons).remove(ignore_missing=yes)!
 
     if (./editor.txt).exists()
         editor = (./editor.txt).read()!
@@ -214,7 +214,7 @@ func main(clean=no -> Abort)
         ") or goodbye()
         while editor == "" or not $Shell"command -v $editor >/dev/null".run().succeeded()
             editor = ask("I don't recognize that editor. Try again? ") or goodbye()
-        (./editor.txt).write(editor)
+        (./editor.txt).write(editor)!
         $Colorful"
 
             Great! From now on, I'll use @(b:$(editor)) to edit files.

@@ -8,22 +8,22 @@ func main()
     path := (/tmp/test-file.txt)
     assert path == (/tmp/test-file.txt)
 
-    path.write("first")
+    path.write("first")!
     assert path.read() == "???"
 
-    path.append(",second")
+    path.append(",second")!
 
     assert path.exists() == yes
 
-    assert path.parent() == (/???)
+    assert path.parent()! == (/???)
 
     assert path.extension() == "???"
 
-    assert path.parent().child("other-file.txt") == (/???)
+    assert path.parent()!.child("other-file.txt") == (/???)
 
     assert (/tmp/test-*.txt).glob() == [???]
 
-    path.remove()
+    path.remove()!
 
     assert path.exists() == ???
 
